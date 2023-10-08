@@ -16,7 +16,9 @@ body {
   width: 100%;
   height: 40px;
   padding-left: 15px;
-
+  display: flex;
+  align-items: center;
+  background-color: white;
 }
 
 .File-Input {
@@ -24,4 +26,45 @@ body {
   width: 100%;
   height: 100%;
   background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.Upload-Button {
+  width: 75px;
+  height: 75px;
+  background-image: url('/public/upload.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  filter: brightness(0%);
+  font-size: 0;
+}
+
+::-webkit-file-upload-button {
+  display: none;
+}
+
+.Upload-Button:hover {
+  filter: brightness(50%);
+}
+
+.Upload-Button:active {
+  filter: brightness(75%);
+}
+
+.Upload-Text {
+  margin-top: 15px;
+  font-family: "Nunito Sans", sans-serif;
 }
