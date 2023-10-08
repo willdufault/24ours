@@ -8,14 +8,15 @@ function App() {
 
   return (
     <div className="App">
-      <div className='Container'>
-        <input
-                type="text" 
-                id="URL-Field"
-                onChange={(e) => setURL(e.target.value)}
-                value={URL}
-              />
-      </div>
+      <input
+              type="text" 
+              id="URL-Field"
+              onChange={(e) => setURL(e.target.value)}
+              value={URL}
+            />
+      <div 
+        className='File-Input'
+      />
     </div>
   );
 }
