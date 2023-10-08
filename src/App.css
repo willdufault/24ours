@@ -1,15 +1,27 @@
 body {
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 100vh;
   margin: 0;
 }
 
 .App {
   text-align: center;
-  width: 600px;
-  height: 500px;
-  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  height: 600px;
+  background-color: white;
+  border-radius: 5px;
+  margin-top: -100px;
+  box-shadow: 0px 0px 20px 0 rgba(0, 0, 0, 0.25);
+}
+
+.Container {
+  width: calc(100% - 50px);
+  height: calc(100% - 50px);
 }
 
 #URL-Field {
@@ -24,47 +36,61 @@ body {
 .File-Input {
   margin-top: 25px;
   width: 100%;
-  height: 100%;
-  background-color: lightgray;
+  height: calc(100% - 65px);
+  background-color: rgb(238, 238, 238);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   border-radius: 5px;
-}
-
-.Upload-Button {
-  width: 75px;
-  height: 75px;
-  background-image: url('/public/upload.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-color: transparent;
-  border: none;
-  filter: brightness(0%);
-  font-size: 0;
-}
-
-::-webkit-file-upload-button {
-  display: none;
-}
-
-.Upload-Button:hover {
-  filter: brightness(50%);
-}
-
-.Upload-Button:active {
-  filter: brightness(75%);
+  border-width: 2px;
+  border-color: rgba(0, 0, 0, 0.15);
+  border-style: dashed;
 }
 
 .Upload-Text {
   margin-top: 15px;
   font-family: "Nunito Sans", sans-serif;
+}
+
+.Upload-Area {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.Drop-Area {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: url('/public/upload.svg');
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  background-position: center;
+  filter: brightness(40%);
+  cursor: pointer;
+}
+
+.Drop-Area:hover {
+  filter: brightness(60%);
+}
+
+.Drop-Area:active {
+  filter: brightness(80%);
+}
+
+.Drop-Text {
+  position: absolute;
+  bottom: 25px;
+  color: white;
+  font-weight: 300;
 }
