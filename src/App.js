@@ -10,21 +10,28 @@ function App() {
   const [dropText, setDropText] = useState('Choose A File Or Drag It Here');
 
   const getFile = (acceptedFiles) => {
-    const file = acceptedFiles[0];
+    const inFile = acceptedFiles[0];
     // console.log(file.size);
-    if (file.size > 5300000) {
+    if (inFile.size > 5300000) {
       setDropText('File is too big! The limit is 5MB');
     } else {
-      setFile(file);
-      setDropText(file.name);
+      setFile(inFile);
+      setDropText(inFile.name);
     }
   };
+
+  const uploadFile = () => {
+    console.log(file)
+  }
 
   return (
     <div className="container mt-4">
       <div className="App">
         <div className="Container">
-          <span className="form-control" id="URL-Field">{URL}</span>
+          <div className="Top-Form">
+            <span className="form-control" id="URL-Field">{URL}</span>
+            <button className="btn btn-primary" onClick={(e) => uploadFile()}>Submit</button>
+          </div>
           <div className="File-Input">
             <Dropzone onDrop={getFile}>
               {({getRootProps, getInputProps}) => (

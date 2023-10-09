@@ -31,6 +31,7 @@ body {
   display: flex;
   align-items: center;
   background-color: white;
+  margin-right: 25px;
 }
 
 .File-Input {
@@ -93,4 +94,12 @@ body {
   bottom: 25px;
   color: white;
   font-weight: 300;
+}
+
+.Top-Form {
+  width: 100%;
+  height: 40px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  display: flex;
 }
