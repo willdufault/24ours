@@ -20,8 +20,15 @@ function App() {
     }
   };
 
-  const uploadFile = () => {
-    console.log(file)
+  const uploadFile = async () => {
+    
+    const requestData = {
+      fileName: file.name,
+      fileBody: file
+    }
+
+    const response = await axios.post('/uploadfile', requestData);
+    console.log(response.data);
   }
 
   return (

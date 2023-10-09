@@ -1,7 +1,7 @@
 // Configure Express.js.
 let express = require('express');
 let app = express();
-let port = 3000;
+let port = 5000;
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`);
 });
@@ -29,11 +29,12 @@ app.get('/', (request, result) => {
 
 app.post('/uploadfile', async (request, result) => {
 	instance.post('/uploadfile', {
-		'fileName': 'hi_from_express.jpg',
-		'fileBody': new FileReader().readAsText('./buff-bee.jpg')
+		'fileName': request.body.fileName,
+		'fileBody': new FileReader().readAsText(request.body.fileBody)
 	})
 	.then(response => {
 		result.status(200).json(response.data);
+		response.end(request.json);
 	})
 	.catch((error) => {
 		result.status(400).json({'message': error});
