@@ -1,8 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FileUploader } from "react-drag-drop-files";
 import Dropzone from 'react-dropzone'
 
 
@@ -11,12 +9,15 @@ function App() {
   const [file, setFile] = useState(null);
   const [dropText, setDropText] = useState('Choose A File Or Drag It Here');
 
-  const fileTypes = ["JPG", "PNG", "GIF"];
-
-  const getFile = (file) => {
-    console.log(file[0]);
-    setFile(file[0]);
-    setDropText(file[0].name);
+  const getFile = (acceptedFiles) => {
+    const file = acceptedFiles[0];
+    // console.log(file.size);
+    if (file.size > 5300000) {
+      setDropText('File is too big! The limit is 5MB');
+    } else {
+      setFile(file);
+      setDropText(file.name);
+    }
   };
 
   return (
