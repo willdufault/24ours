@@ -10,7 +10,7 @@ def lambda_handler(event, context):
     
     
     # This isnt actually in b64 just reusing the var name
-    b64_decode = event["fileBody"].decompress()
+    b64_decode = lzstring.decompress(event["fileBody"])
     
     print(b64_decode)
     
