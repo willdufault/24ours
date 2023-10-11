@@ -4,7 +4,6 @@ import axios from 'axios';
 import Dropzone from 'react-dropzone'
 import logo from './24ours.png';
 
-
 function App() {
   const [URL, setURL] = useState('File URL');
   const [file, setFile] = useState(null);
@@ -13,7 +12,7 @@ function App() {
 
   const getFile = (acceptedFiles) => {
     const inFile = acceptedFiles[0];
-    // console.log(file.size);
+    // console.log(inFile);
     if (inFile.size > 5300000) {
       setDropText('File is too big! The limit is 5MB');
     } else {
@@ -22,18 +21,31 @@ function App() {
     }
   };
 
+  const convertFileToBase64 = (file) => new Promise((resolve, reject) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+
   const uploadFile = async () => {
+
+	let file_body = (await convertFileToBase64(file)).split(',')[1];
+
+
     const requestData = {
       fileName: file.name,
-      fileBody: file
+      fileBody: file_body
     }
+
+	console.log(requestData)
    
     const response = await axios.post('/uploadfile', requestData);
-    //console.log(response.body.url);
-    if(response.statusCode === 200) {
+	let data = response.data;
+    if(data.statusCode === 200) {
       setUploadMessage('File succesfully uploaded! Copy the link and share!');
       //un-comment when links are working
-      //setURL(response.body.url);
+      setURL(data.body.url);
     } else {
       setUploadMessage('Error uploading file');
     }

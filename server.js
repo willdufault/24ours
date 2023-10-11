@@ -1,13 +1,14 @@
 const path = require('path');
+const bodyParser = require('body-parser');
 let express = require('express');
 let app = express();
 let port = 3000;
+app.use(bodyParser.json({limit: '10mb'}));
+// app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 app.use(express.json());
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`);
 });
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
 
 // Configure environment variables.
 require('dotenv').config()
@@ -15,7 +16,7 @@ require('dotenv').config()
 // Configure axios.
 let axios = require('axios');
 let instance = axios.create({
-	baseURL: process.env.API_ENDPOINT_URL
+	baseURL: process.env.API_ENDPOINT_URL,
 });
 
 // GET and POST requests.
@@ -69,4 +70,4 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/frontend/build', 'index.html'));
 });
 
-const listener = app.listen( 5000 || 3000 )
+// const listener = app.listen( 5000 || 3000 )
