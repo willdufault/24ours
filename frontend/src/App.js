@@ -13,7 +13,6 @@ function App() {
   const getFile = (acceptedFiles) => {
     setURL('');
     const inFile = acceptedFiles[0];
-    // console.log(inFile);
     if (inFile.size > 5300000) {
       setDropText('File is too big! The limit is 5MB');
     } else {
@@ -39,8 +38,6 @@ function App() {
         fileName: file.name,
         fileBody: file_body
       }
-  
-      console.log(requestData)
      
       const response = await axios.post('/uploadfile', requestData);
       let data = response.data;
@@ -82,6 +79,9 @@ function App() {
             <div className="Top-Form">
               <button className="btn btn-success mx-4" onClick={copyLink}>Copy Link</button>
               <button className="btn btn-primary mx-4" onClick={uploadFile}>Submit</button>
+            </div>
+            <div>
+              <span className="form-control" id="URL-Field">{URL}</span>
             </div>
             <div className="File-Input">
               <div className="Close-Button">
