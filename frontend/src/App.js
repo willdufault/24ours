@@ -11,6 +11,7 @@ function App() {
   const [uploadMessage, setUploadMessage] = useState(null);
 
   const getFile = (acceptedFiles) => {
+    setURL('');
     const inFile = acceptedFiles[0];
     // console.log(inFile);
     if (inFile.size > 5300000) {
