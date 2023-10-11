@@ -5,7 +5,7 @@ import Dropzone from 'react-dropzone'
 import logo from './24ours.png';
 
 function App() {
-  const [URL, setURL] = useState('File URL');
+  const [URL, setURL] = useState('');
   const [file, setFile] = useState(null);
   const [dropText, setDropText] = useState('Choose A File Or Drag It Here');
   const [uploadMessage, setUploadMessage] = useState(null);
@@ -30,27 +30,36 @@ function App() {
 
   const uploadFile = async () => {
 
-	let file_body = (await convertFileToBase64(file)).split(',')[1];
-
+	  let file_body = (await convertFileToBase64(file)).split(',')[1];
 
     const requestData = {
       fileName: file.name,
       fileBody: file_body
     }
 
-	console.log(requestData)
+	  console.log(requestData)
    
     const response = await axios.post('/uploadfile', requestData);
-	let data = response.data;
-    if(data.statusCode === 200) {
-      setUploadMessage('File succesfully uploaded! Copy the link and share!');
-      //un-comment when links are working
-      setURL(data.body.url);
-    } else {
-      setUploadMessage('Error uploading file');
-    }
+    let data = response.data;
+      if(data.statusCode === 200) {
+        setURL(data.body.url);
+        setUploadMessage('File succesfully uploaded! Copy the link and share!');
+      } else {
+        setUploadMessage('Error uploading file');
+      }
     
   }
+
+  const copyLink = () => {
+    if(URL !== '') {
+      navigator.clipboard.writeText(URL)
+      .then(() => {
+        setUploadMessage('URL copied to clipboard!');
+      })
+    } else {
+      setUploadMessage('Please upload a file');
+    }
+  };
 
   return (
     <div>
@@ -61,8 +70,9 @@ function App() {
         <div className="App">
           <div className="Container">
             <div className="Top-Form">
-              <span className="form-control" id="URL-Field">{URL}</span>
-              <button className="btn btn-primary" onClick={uploadFile}>Submit</button>
+              {/* <span className="form-control" id="URL-Field">{URL}</span> */}
+              <button className="btn btn-success mx-4" onClick={copyLink}>Copy Link</button>
+              <button className="btn btn-primary mx-4" onClick={uploadFile}>Submit</button>
             </div>
             <div className="File-Input">
               <Dropzone onDrop={getFile}>

@@ -102,6 +102,7 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
   display: flex;
+  justify-content: center;
 }
 
 .Top-Logo {
