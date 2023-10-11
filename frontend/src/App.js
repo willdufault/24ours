@@ -9,6 +9,7 @@ function App() {
   const [URL, setURL] = useState('File URL');
   const [file, setFile] = useState(null);
   const [dropText, setDropText] = useState('Choose A File Or Drag It Here');
+  const [uploadMessage, setUploadMessage] = useState(null);
 
   const getFile = (acceptedFiles) => {
     const inFile = acceptedFiles[0];
@@ -22,14 +23,21 @@ function App() {
   };
 
   const uploadFile = async () => {
-    
     const requestData = {
       fileName: file.name,
       fileBody: file
     }
    
     const response = await axios.post('/uploadfile', requestData);
-    console.log("logging" + response.data);
+    //console.log(response.body.url);
+    if(response.statusCode === 200) {
+      setUploadMessage('File succesfully uploaded! Copy the link and share!');
+      //un-comment when links are working
+      //setURL(response.body.url);
+    } else {
+      setUploadMessage('Error uploading file');
+    }
+    
   }
 
   return (
@@ -42,7 +50,7 @@ function App() {
           <div className="Container">
             <div className="Top-Form">
               <span className="form-control" id="URL-Field">{URL}</span>
-              <button className="btn btn-primary" onClick={(e) => uploadFile()}>Submit</button>
+              <button className="btn btn-primary" onClick={uploadFile}>Submit</button>
             </div>
             <div className="File-Input">
               <Dropzone onDrop={getFile}>
@@ -56,6 +64,7 @@ function App() {
                 )}
               </Dropzone>
             </div>
+            {uploadMessage && <div className="Upload-Message">{uploadMessage}</div>}
           </div>
         </div>
       </div>
