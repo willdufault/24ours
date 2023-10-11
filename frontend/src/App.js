@@ -1,7 +1,8 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 import Dropzone from 'react-dropzone'
+import logo from './24ours.png';
 
 
 function App() {
@@ -26,39 +27,35 @@ function App() {
       fileName: file.name,
       fileBody: file
     }
-
-    const response = await fetch( '/uploadfile', {
-      method:'POST',
-      body: JSON.stringify(requestData),
-      headers: { 'Content-Type': 'application/json' }
-    })
-
-    const resData = await response.json();
-    console.log(resData);
-    // await axios.post('/uploadfile', requestData);
-    // const response = await axios.get('/appdata');
-    // console.log(response.data);
+   
+    const response = await axios.post('/uploadfile', requestData);
+    console.log("logging" + response.data);
   }
 
   return (
-    <div className="container mt-4">
-      <div className="App">
-        <div className="Container">
-          <div className="Top-Form">
-            <span className="form-control" id="URL-Field">{URL}</span>
-            <button className="btn btn-primary" onClick={(e) => uploadFile()}>Submit</button>
-          </div>
-          <div className="File-Input">
-            <Dropzone onDrop={getFile}>
-              {({getRootProps, getInputProps}) => (
-                <section className="Upload-Area">
-                  <div className="Drop-Area" {...getRootProps()}>
-                    <input {...getInputProps()} />
-                    <span className="Drop-Text" >{dropText}</span>
-                  </div>
-                </section>
-              )}
-            </Dropzone>
+    <div>
+      <div className="Top-Logo">
+        <img src={logo} alt="Logo" width="250" height="125" />
+      </div>
+      <div className="container mt-4">
+        <div className="App">
+          <div className="Container">
+            <div className="Top-Form">
+              <span className="form-control" id="URL-Field">{URL}</span>
+              <button className="btn btn-primary" onClick={(e) => uploadFile()}>Submit</button>
+            </div>
+            <div className="File-Input">
+              <Dropzone onDrop={getFile}>
+                {({ getRootProps, getInputProps }) => (
+                  <section className="Upload-Area">
+                    <div className="Drop-Area" {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <span className="Drop-Text">{dropText}</span>
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+            </div>
           </div>
         </div>
       </div>

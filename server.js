@@ -19,9 +19,9 @@ let instance = axios.create({
 });
 
 // GET and POST requests.
-app.get('/', (request, result) => {
-	result.send('hi from express server!')
-});
+// app.get('/', (request, result) => {
+// 	result.send('hi from express server!')
+// });
 
 app.post('/uploadfile', async (request, result) => {
 	instance.post('/uploadfile', {
