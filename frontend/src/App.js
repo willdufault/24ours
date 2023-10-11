@@ -30,25 +30,27 @@ function App() {
   });
 
   const uploadFile = async () => {
+    if (file === null) {
+      setUploadMessage('Please upload a file')
+    } else {
+      let file_body = (await convertFileToBase64(file)).split(',')[1];
 
-	  let file_body = (await convertFileToBase64(file)).split(',')[1];
-
-    const requestData = {
-      fileName: file.name,
-      fileBody: file_body
-    }
-
-	  console.log(requestData)
-   
-    const response = await axios.post('/uploadfile', requestData);
-    let data = response.data;
-      if(data.statusCode === 200) {
-        setURL(data.body.url);
-        setUploadMessage('File succesfully uploaded! Copy the link and share!');
-      } else {
-        setUploadMessage('Error uploading file');
+      const requestData = {
+        fileName: file.name,
+        fileBody: file_body
       }
-    
+  
+      console.log(requestData)
+     
+      const response = await axios.post('/uploadfile', requestData);
+      let data = response.data;
+        if(data.statusCode === 200) {
+          setURL(data.body.url);
+          setUploadMessage('File succesfully uploaded! Copy the link and share!');
+        } else {
+          setUploadMessage('Error uploading file');
+        }
+    }
   }
 
   const copyLink = () => {
@@ -62,6 +64,13 @@ function App() {
     }
   };
 
+  const clearFile = () => {
+    setURL('');
+    setFile(null);
+    setUploadMessage('');
+    setDropText('Choose A File Or Drag It Here');
+  };
+
   return (
     <div>
       <div className="Top-Logo">
@@ -71,11 +80,13 @@ function App() {
         <div className="App">
           <div className="Container">
             <div className="Top-Form">
-              {/* <span className="form-control" id="URL-Field">{URL}</span> */}
               <button className="btn btn-success mx-4" onClick={copyLink}>Copy Link</button>
               <button className="btn btn-primary mx-4" onClick={uploadFile}>Submit</button>
             </div>
             <div className="File-Input">
+              <div className="Close-Button">
+                <button type="button" class="btn-close btn-close-custom" aria-label="Close" onClick={clearFile}></button>
+              </div>
               <Dropzone onDrop={getFile}>
                 {({ getRootProps, getInputProps }) => (
                   <section className="Upload-Area">

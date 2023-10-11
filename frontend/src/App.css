@@ -35,6 +35,7 @@ body {
 }
 
 .File-Input {
+  position: relative;
   margin-top: 25px;
   width: 100%;
   height: calc(100% - 65px);
@@ -111,4 +112,15 @@ body {
   align-items: center;
   margin-bottom: 115px;
   margin-top: -15px;
+}
+
+.Close-Button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 6;
+}
+
+.btn-close-custom {
+  color: black;
 }
