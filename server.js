@@ -2,7 +2,6 @@
 let express = require('express');
 let app = express();
 let port = 3000;
-app.use(express.json());
 app.listen(port, () => {
 	console.log(`Example app listening on port ${port}`);
 });
@@ -10,6 +9,7 @@ app.listen(port, () => {
 // Set payload size to 10mb.
 let bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: '10mb'}));
+app.use(express.json());
 
 // Serve React app.
 let path = require('path');

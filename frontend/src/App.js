@@ -1,16 +1,19 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Dropzone from 'react-dropzone'
-import logo from './24ours.png';
 
 function App() {
+  // Hooks.
   const [URL, setURL] = useState('');
   const [file, setFile] = useState(null);
   const [dropText, setDropText] = useState('Choose A File Or Drag It Here');
   const [uploadMessage, setUploadMessage] = useState(null);
 
   const getFile = (acceptedFiles) => {
+	/*
+	If the dropped file is less than 5MB, store it.
+	*/
     setURL('');
     const inFile = acceptedFiles[0];
     if (inFile.size > 5300000) {
@@ -22,6 +25,9 @@ function App() {
   };
 
   const convertFileToBase64 = (file) => new Promise((resolve, reject) => {
+	/*
+	Convert the content of the given file to a base64 string.
+	*/
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
@@ -29,28 +35,39 @@ function App() {
   });
 
   const uploadFile = async () => {
+	/*
+	Upload the file to S3.
+	*/
+	// No File.
     if (file === null) {
       setUploadMessage('Please upload a file')
     } else {
+	  // Convert the file body to base64.
       let file_body = (await convertFileToBase64(file)).split(',')[1];
 
       const requestData = {
         fileName: file.name,
         fileBody: file_body
       }
-     
+      // POST request to express.js server.
       const response = await axios.post('/uploadfile', requestData);
       let data = response.data;
-        if(data.statusCode === 200) {
-          setURL(data.body.url);
-          setUploadMessage('File succesfully uploaded! Copy the link and share!');
-        } else {
-          setUploadMessage('Error uploading file');
-        }
+
+	  // Success.
+	  if(data.statusCode === 200) {
+		// Set the URL and notify the user.
+	 	setURL(data.body.url);
+		setUploadMessage('File succesfully uploaded! Copy the link and share!');
+	  } else {
+		setUploadMessage('Error uploading file');
+	  }
     }
   }
 
   const copyLink = () => {
+	/*
+	Copy the S3 presigned link to the uploaded file to the user's clipboard. 
+	*/
     if(URL !== '') {
       navigator.clipboard.writeText(URL)
       .then(() => {
@@ -62,6 +79,9 @@ function App() {
   };
 
   const clearFile = () => {
+	/*
+	Remove the file from the dropzone.
+	*/
     setURL('');
     setFile(null);
     setUploadMessage('');
@@ -71,7 +91,7 @@ function App() {
   return (
     <div>
       <div className="Top-Logo">
-        <img src={logo} alt="Logo" width="250" height="125" />
+        <img src="/24ours.png" alt="Logo" width="250" height="125" />
       </div>
       <div className="container mt-4">
         <div className="App">
