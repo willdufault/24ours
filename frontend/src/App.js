@@ -97,15 +97,13 @@ function App() {
         <div className="App">
           <div className="Container">
             <div className="Top-Form">
-              <button className="btn btn-success mx-4" onClick={copyLink}>Copy Link</button>
-              <button className="btn btn-primary mx-4" onClick={uploadFile}>Submit</button>
-            </div>
-            <div>
+              <button className="btn btn-success" onClick={copyLink}>Copy</button>
               <span className="form-control" id="URL-Field">{URL}</span>
+              <button className="btn btn-primary" onClick={uploadFile}>Submit</button>
             </div>
             <div className="File-Input">
               <div className="Close-Button">
-                <button type="button" class="btn-close btn-close-custom" aria-label="Close" onClick={clearFile}></button>
+                <button type="button" className="btn-close btn-close-custom" aria-label="Close" onClick={clearFile}></button>
               </div>
               <Dropzone onDrop={getFile}>
                 {({ getRootProps, getInputProps }) => (

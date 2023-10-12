@@ -24,21 +24,11 @@ body {
   height: calc(100% - 50px);
 }
 
-#URL-Field {
-  width: 100%;
-  height: 40px;
-  padding-left: 15px;
-  display: flex;
-  align-items: center;
-  background-color: white;
-  margin-right: 25px;
-}
-
 .File-Input {
   position: relative;
   margin-top: 25px;
   width: 100%;
-  height: calc(100% - 130px);
+  height: calc(100% - 80px);
   background-color: rgb(238, 238, 238);
   display: flex;
   justify-content: center;
@@ -51,7 +41,6 @@ body {
 }
 
 .Upload-Text {
-  margin-top: 15px;
   font-family: "Nunito Sans", sans-serif;
 }
 
@@ -125,9 +114,37 @@ body {
   color: black;
 }
 
-.form-control {
-  margin-top: 25px;
+.Top-Form {
+  display: flex;
+  align-items: center;
+}
+
+#URL-Field {
+  width: 100%;
+  height: 40px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  background-color: white;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: clip;
+  flex-grow: 1;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+#copy-link {
+  width: 100px;
+  height: 40px;
+}
+
+.Upload-Message {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+  color: darkgray;
+  font-size: 14px;
 }
