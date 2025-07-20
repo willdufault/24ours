@@ -2,8 +2,6 @@
 
 ---
 
-[Heroku (no longer working)](https://twentyfourours-718556141502.herokuapp.com/)
-
 ## About:
 
 24Ours ia a free file-sharing web application that deletes all files every day at midnight EST. Users can upload files of any type and will recieve a sharable link that will work for exactly 24 hours or until that day at midnight.
