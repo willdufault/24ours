@@ -1,6 +1,8 @@
-![image](https://github.com/willdufault/24ours/assets/99445180/c4793e1e-13d0-4cf5-965f-6de8d58d0837)
+<div align='center'>
+  <img width=250 height=125 src='https://github.com/willdufault/24ours/assets/99445180/c4793e1e-13d0-4cf5-965f-6de8d58d0837'/>
+</div>
 
----
+# 24Ours: A cloud-based temporary file-sharing service
 
 ## About:
 
